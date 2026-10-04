@@ -5,6 +5,7 @@ let rollback = 98;
 let fullPrice = 200000;
 let adaptive = true; 
 
+
 console.log(typeof title);
 console.log(typeof fullPrice);
 console.log(typeof adaptive);
