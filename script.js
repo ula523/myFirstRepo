@@ -1,19 +1,18 @@
 'use strict';
 
-let allServicePrices;
-let fullPrice;
-let servicePercentPrice;
+let allServicePrices
+let fullPrice
+let servicePercentPrice
 
-let title = prompt('Как называется ваш проект?');
-let screens = prompt('Какие типы экранов нужно разработать?', 'Простые, Сложные, Интерактивные');
-let screenPrise = +prompt('Сколько будет стоить данная работа?');
-let adaptive = confirm('Нужен ли адаптив на сайте?');
-let service1 = prompt('Какой дополнительный тип услуги нужен?');
-let servicePrice1 = +prompt('Сколько это будет стоить?');
-let service2 = prompt('Какой дополнительный тип услуги нужен?');
-let servicePrice2 = +prompt('Сколько это будет стоить?');
-let rollback = 98;
-
+let title = prompt('Как называется ваш проект?')
+let screens = prompt('Какие типы экранов нужно разработать?', 'Простые, Сложные, Интерактивные')
+let screenPrise = +prompt('Сколько будет стоить данная работа?')
+let adaptive = confirm('Нужен ли адаптив на сайте?')
+let service1 = prompt('Какой дополнительный тип услуги нужен?')
+let servicePrice1 = +prompt('Сколько это будет стоить?')
+let service2 = prompt('Какой дополнительный тип услуги нужен?')
+let servicePrice2 = +prompt('Сколько это будет стоить?')
+let rollback = 10
 
 
 const showTypeOf = function(variable) {
@@ -32,9 +31,12 @@ const getRollbackMessage = function(price) {
 }
 }
 
-const getAllServicePrices = function() {
-    return servicePrice1 + servicePrice2;
+const getAllServicePrices = function(servicePrice1, servicePrice2) {
+    allServicePrices = servicePrice1 + servicePrice2;
 }
+getAllServicePrices(servicePrice1, servicePrice2)
+
+console.log(allServicePrices);
 
 function getFullPrice() {
     return screenPrise + getAllServicePrices();
@@ -53,7 +55,7 @@ showTypeOf(title);
 showTypeOf(screenPrise);
 showTypeOf(adaptive);
 
-allServicePrices = getAllServicePrices();
+ 
 fullPrice = getFullPrice();
 servicePercentPrice = getServicePercentPrices();
 
@@ -64,7 +66,3 @@ console.log(screens.length);
 
 
 console.log('Стоимость верстки экранов ' + screenPrise + ' рублей');
-
-
-
-
