@@ -1,116 +1,54 @@
 'use strict';
 
-let title
-let screens
-let screenPrice
-let adaptive
-let rollback = 10
-let allServicePrices
-let fullPrice
-let servicePercentPrice
-let service1
-let service2
 
 //Проверка на число
 const isNumber = function (num) {
     return !isNaN(parseFloat(num)) && isFinite(num);
 }
 
- 
-
-
-
-const screenPrise = screenPrice === null ? null : Number(screenPrice);
-
-
-const asking = function () {
- title = prompt("Как называется ваш проект?", "Калькулятор верстки");
- screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные");
- 
- 
-
- //УСЛОЖНЕННОЕ ЗАДАНИЕ №1
-do {
-    screenPrice = prompt("Сколько будет стоить данная работа?");
-} while (screenPrice !== null && !isNumber(screenPrice));
-
- screenPrice = +screenPrice;
-
-  adaptive = true || confirm('Нужен ли адаптив?');
-
-}
-
-const getAllServicePrices = function () {
-    let servicePrices
-    let sum = 0
-
-    for (let i = 0; i < 2; i++) {
-        if (i === 0) {
-            service1 = prompt('Какой дополнительный тип услуги нужен?')
-
-        } else if (i === 1) {
-            service2 = prompt('Какой дополнительный тип услуги нужен?')
-
-        }
-
-        //Проверка на число
-
-        do {
-            servicePrices = prompt('Сколько это будет стоить?');
-        } while (!isNumber(servicePrices));
-
-         sum += +servicePrices;
-        
-
-     
-
+const gameBot = function() {
+    let mainNumber = Math.floor(Math.random() * 100) + 1; //случайное целое число
+    console.log(mainNumber);
+    const getAskNumber = function() {
+    let askNumber = prompt("Угадай число от 1 до 100");
+    //если пользователь нажимает "Отмена", то игра заканчивается и выводится сообщение "Игра окончена".
+    if(askNumber === null) {
+        alert("Игра окончена");
+        return;
     }
-    return sum
-  //  return servicePrice1 + servicePrice2
+    //если пользовательское число больше, то бот выводит "Загаданное число меньше" и предлагает ввести новый вариант;
+    if (askNumber > 100) {
+       alert("Загаданное число меньше");
+      return getAskNumber();
+
+    } 
+    //если пользовательское число меньше, то бот выводит "Загаданное число больше" и предлагает ввести новый вариант;
+    if(askNumber < 1) {
+        alert("Загаданное число больше");
+        return getAskNumber();
+
+    } 
+    //если пользователь ввел не число, то выводит сообщение "Введи число!" и предлагает ввести новый вариант
+    if(!isNumber(askNumber)) {
+        alert("Введи число!");
+        return getAskNumber();
+
+    }  
+    alert('Поздравляю, Вы угадали!!!');
+
+}
+getAskNumber()
 }
 
-const showTypeOf = function (variable) {
-    console.log(variable, typeof variable);
-}
 
-const getFullPrice = function (screenPrice, allServicePrices) {
-    return screenPrice + allServicePrices;
-}
 
-const getServicePercentPrices = function() {
-     return fullPrice - (fullPrice * (rollback / 100));
-}
+gameBot()
 
-const getTitle = function () {
-      return title.trim()[0].toUpperCase() + title.trim().substr(1).toLowerCase()
-}
 
-const getRollbackMessage = function (price) {
-    if (price >= 30000){
-    return "Даем скидку в 10%";
-} else if (price >= 15000 && fullPrice < 30000){
-     return "Даем скидку в 5%";
-} else if (price >= 0 && fullPrice < 15000){
-    return "Скидка не предусмотрена";
-} else {
-    return "Что то пошло не так";
-}
-}
-asking()
-allServicePrices = getAllServicePrices()
-fullPrice = getFullPrice(screenPrice, allServicePrices)
-servicePercentPrice = getServicePercentPrices()
-title = getTitle()
 
-showTypeOf(title)
-showTypeOf(screenPrice)
-showTypeOf(adaptive)
 
-console.log("allServicePrices", allServicePrices);
-console.log(getRollbackMessage(fullPrice));
-console.log(typeof title);
-console.log(typeof screenPrice);
-console.log(typeof adaptive);
-console.log(screens.length);
-console.log(servicePercentPrice);
-console.log('Стоимость верстки экранов ' + screenPrice + ' рублей ' + 'и ' + 'Стоимость разработки сайта ' + fullPrice + ' рублей');
+
+
+
+
+
