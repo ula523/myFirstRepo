@@ -4,7 +4,6 @@ let title
 let screens
 let screenPrice
 let adaptive
-
 let rollback = 10
 let allServicePrices
 let fullPrice
@@ -17,16 +16,23 @@ const isNumber = function (num) {
     return !isNaN(parseFloat(num)) && isFinite(num);
 }
 
+ 
+
+
+
+const screenPrise = screenPrice === null ? null : Number(screenPrice);
+
+
 const asking = function () {
  title = prompt("Как называется ваш проект?", "Калькулятор верстки");
  screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные");
  
  
 
- //Цикл do while
- do {
+ //УСЛОЖНЕННОЕ ЗАДАНИЕ №1
+do {
     screenPrice = prompt("Сколько будет стоить данная работа?");
-} while (!isNumber(screenPrice));
+} while (screenPrice !== null && !isNumber(screenPrice));
 
  screenPrice = +screenPrice;
 
@@ -101,13 +107,10 @@ showTypeOf(screenPrice)
 showTypeOf(adaptive)
 
 console.log("allServicePrices", allServicePrices);
-
 console.log(getRollbackMessage(fullPrice));
 console.log(typeof title);
 console.log(typeof screenPrice);
 console.log(typeof adaptive);
-
 console.log(screens.length);
 console.log(servicePercentPrice);
-
 console.log('Стоимость верстки экранов ' + screenPrice + ' рублей ' + 'и ' + 'Стоимость разработки сайта ' + fullPrice + ' рублей');
