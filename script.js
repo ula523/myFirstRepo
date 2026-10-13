@@ -71,31 +71,34 @@ getRollbackMessage: function (price) {
     return "Что то пошло не так";
 }
 },
+start: function () {
+appData.asking();
+
+appData.allServicePrices = appData.getAllServicePrices();
+appData.fullPrice = appData.getFullPrice(appData.screenPrice, appData.allServicePrices);
+appData.servicePercentPrice = appData.getServicePercentPrices();
+appData.title = appData.getTitle();
+appData.logger();
+
+
+},
+logger: function () {
+console.log(appData.fullPrice);
+console.log(appData.servicePercentPrice);
+for (let key in appData) {
+    console.log(key, appData[key]);
+}
+
+}
 
 }
 
 
-const screenPrise = appData.screenPrice === null ? null : Number(appData.screenPrice);
 
 
 
+appData.start();
 
 
 
-
-
-
-
-
-
-
-
-appData.asking()
-appData.allServicePrices = appData.getAllServicePrices()
-appData.fullPrice = appData.getFullPrice(appData.screenPrice, appData.allServicePrices)
-appData.servicePercentPrice = appData.getServicePercentPrices()
-appData.title = appData.getTitle()
-
-console.log(appData.fullPrice);
-console.log(appData.servicePercentPrice);
 
