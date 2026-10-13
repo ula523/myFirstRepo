@@ -17,27 +17,16 @@ asking: function () {
 
 do {
     appData.screenPrice = prompt("Сколько будет стоить данная работа?");
-} while (appData.screenPrice !== null && !isNumber(appData.screenPrice));
+} while (appData.screenPrice !== null && !appData.isNumber(appData.screenPrice));
 
  appData.screenPrice = +appData.screenPrice;
  appData.adaptive = true || confirm('Нужен ли адаптив?');
 
-}
-}
-
-//Проверка на число
-const isNumber = function (num) {
+},
+ isNumber: function (num) {
     return !isNaN(parseFloat(num)) && isFinite(num);
-}
-
- 
-
-const screenPrise = appData.screenPrice === null ? null : Number(appData.screenPrice);
-
-
-
-
-const getAllServicePrices = function () {
+},
+ getAllServicePrices: function () {
     let servicePrices
     let sum = 0
 
@@ -53,33 +42,25 @@ const getAllServicePrices = function () {
         //Проверка на число
 
         do {
-            servicePrices = prompt('Сколько это будет стоить?');
-        } while (!isNumber(servicePrices));
+            appData.servicePrices = prompt('Сколько это будет стоить?');
+        } while (!appData.isNumber(appData.servicePrices));
 
-         sum += +servicePrices;
+         sum += +appData.servicePrices;
         
-
-     
-
     }
     return sum
   //  return servicePrice1 + servicePrice2
-}
-
-
-const getFullPrice = function (screenPrice, allServicePrices) {
+},
+ getFullPrice: function (screenPrice, allServicePrices) {
     return appData.screenPrice + appData.allServicePrices;
-}
-
-const getServicePercentPrices = function() {
+},
+getServicePercentPrices: function() {
      return appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
-}
-
-const getTitle = function () {
+},
+getTitle: function () {
       return appData.title.trim()[0].toUpperCase() + appData.title.trim().substr(1).toLowerCase()
-}
-
-const getRollbackMessage = function (price) {
+},
+getRollbackMessage: function (price) {
     if (price >= 30000){
     return "Даем скидку в 10%";
 } else if (price >= 15000 && fullPrice < 30000){
@@ -89,12 +70,31 @@ const getRollbackMessage = function (price) {
 } else {
     return "Что то пошло не так";
 }
+},
+
 }
+
+
+const screenPrise = appData.screenPrice === null ? null : Number(appData.screenPrice);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 appData.asking()
-appData.allServicePrices = getAllServicePrices()
-appData.fullPrice = getFullPrice(appData.screenPrice, appData.allServicePrices)
-appData.servicePercentPrice = getServicePercentPrices()
-appData.title = getTitle()
+appData.allServicePrices = appData.getAllServicePrices()
+appData.fullPrice = appData.getFullPrice(appData.screenPrice, appData.allServicePrices)
+appData.servicePercentPrice = appData.getServicePercentPrices()
+appData.title = appData.getTitle()
 
 console.log(appData.fullPrice);
 console.log(appData.servicePercentPrice);
