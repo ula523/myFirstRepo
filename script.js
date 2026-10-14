@@ -18,42 +18,58 @@ appData.getServicePercentPrices();
 appData.getTitle();
 appData.logger();
 },
+// проверка на число
 isNumber: function (num) {
     return !isNaN(parseFloat(num)) && isFinite(num);
 },
+//проверка на строку
+isText: function (str) {
+    return typeof str === 'string' && /\p{L}/u.test(str);
+},
+
 asking: function () {
- appData.title = prompt("Как называется ваш проект?", "Калькулятор верстки");
-
-for (let i = 0; i < 2; i++) {
-    let name = prompt("Какие типы экранов нужно разработать?");
-    let price = 0
+    
     do {
-    price = prompt("Сколько будет стоить данная работа?");
-   } while (!appData.isNumber(price));
+        appData.title = prompt("Как называется ваш проект?","Калькулятор верстки");
+    } while (!appData.isText(appData.title));
 
-   //запись в массив screens
-   appData.screens.push({id: i, name: name, price: price})
+    for (let i = 0; i < 2; i++) {
+        let name;
 
-}
-
-
-
-for (let i = 0; i < 2; i++) {
-    let name = prompt('Какой дополнительный тип услуги нужен?')
-    let price = 0
-      
-
+     
         do {
-            price = prompt('Сколько это будет стоить?');
+            name = prompt("Какие типы экранов нужно разработать?");
+        } while (!appData.isText(name));
+
+        let price;
+
+      
+        do {
+            price = prompt("Сколько будет стоить данная работа?");
         } while (!appData.isNumber(price));
 
-       appData.services[name] = +price
-        
+        appData.screens.push({id: i, name: name.trim(), price: +price});
     }
 
- appData.screenPrice = +appData.screenPrice;
- appData.adaptive = true || confirm('Нужен ли адаптив?');
+    for (let i = 0; i < 2; i++) {
+        let name;
 
+        
+        do {
+            name = prompt("Какой дополнительный тип услуги нужен?");
+        } while (!appData.isText(name));
+
+        let price;
+
+        do {
+            price = prompt("Сколько это будет стоить?");
+        } while (!appData.isNumber(price));
+
+        appData.services[name.trim()] = +price;
+    }
+
+    appData.screenPrice = +appData.screenPrice;
+    appData.adaptive = confirm("Нужен ли адаптив?");
 },
 
 addPrices: function() {
