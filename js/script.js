@@ -1,5 +1,23 @@
 'use strict';
 
+
+let title = document.getElementsByTagName('h1')[0]
+let buttonStart = document.getElementsByClassName('handler_btn')[0]
+let buttonReset = document.getElementsByClassName('handler_btn')[1]
+let plus = document.querySelector('.screen-btn')
+let otherItemsPercent = document.querySelectorAll('.other-items.percent')
+let otherItemsNumber = document.querySelectorAll('.other-items.number')
+let range = document.querySelector('.rollback input[type="range"]')
+let rangeValue = document.querySelector('span.range-value ')
+let totalInput = document.getElementsByClassName('total-input')
+let screenClass = document.querySelectorAll('.screen')
+
+for (const input of totalInput) {
+  console.log(input);
+}
+
+
+
 const appData = {
 title: '',
 screens: [],
@@ -114,7 +132,3 @@ console.log(appData.screens);
 
 
 appData.start();
-
-
-
-
