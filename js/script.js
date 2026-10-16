@@ -32,7 +32,7 @@ book5[8].before(book5[5]);
 let newList = book6[0].cloneNode(true);
 newList.textContent = 'Глава 8: За пределами ES6';
 book6[8].after(newList);
-book6 = book[5].querySelectorAll('li'); // обновление после перемещения
+book6 = book[5].querySelectorAll('li');
 
 
 console.log(book);
