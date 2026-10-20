@@ -1,6 +1,5 @@
 'use strict';
 
-
 let title = document.getElementsByTagName('h1')[0]
 let buttonStart = document.getElementsByClassName('handler_btn')[0]
 let otherItemsPercent = document.querySelectorAll('.other-items.percent')
@@ -34,9 +33,15 @@ servicesPercent: {},
 servicesNumber: {},
 init: function() {
     appData.addTitle()
-    appData.start()
     buttonStart.addEventListener('click', appData.start) //обработчик события по клику, который запускает метод appData.start
     plus.addEventListener('click', appData.addScreenBlock)
+
+    //меняется значение при перемещении ползунка
+    range.addEventListener('input', function() {
+        rangeValue.textContent = range.value;
+        appData.rollback = Number(range.value);
+    })
+    
 
 },
 addTitle: function() {
@@ -44,16 +49,23 @@ addTitle: function() {
     
 },
 start: function () {
-   
+    //проверка, что тип экранов не пустой 
+    const selects = document.querySelectorAll('.screen select');
+
+    for (const select of selects) {
+        if (select.value === '' || select.value === '0') {
+            alert('Выберите тип экрана');
+            return;
+        }
+    }
     appData.addScreens()
     appData.addServices()
-
-appData.addPrices()
+    appData.addPrices()
 
 //appData.getServicePercentPrices()
 
 //appData.logger()
- appData.showResult()
+    appData.showResult()
 },
 
 //вывод результатов
@@ -62,6 +74,10 @@ showResult: function() {
    total.value = appData.screenPrice
    totalCountOther.value = appData.servicePricesPercent + appData.servicePricesNumber
    fullTotalCount.value = appData.fullPrice
+   //Стоимость с учетом отката
+    totalCountRollback.value = appData.servicePercentPrice
+    //Количество экранов
+    totalCount.value = appData.screenCount;
 },
 
 addScreens: function() {
@@ -74,14 +90,15 @@ addScreens: function() {
     appData.screens.push({
         id: index, 
         name: selectName, 
-        price: +select.value * +input.value
+        price: +select.value * +input.value,
+        count: +input.value,
    
 
   })
 
 })
-  console.log(appData.screens);
   
+
 },
 //дает объекту необходимую информацию
 addServices: function() {
@@ -90,9 +107,7 @@ addServices: function() {
         const check = item.querySelector('input[type=checkbox]')
         const label = item.querySelector('label')
         const input = item.querySelector('input[type=text]') 
-       console.log(check);
-       console.log(label);
-       console.log(input);
+   
        if (check.checked) { //в объект попадают свойства, которые выбрали
         appData.servicesPercent[label.textContent] = +input.value; 
        }
@@ -104,9 +119,7 @@ addServices: function() {
         const check = item.querySelector('input[type=checkbox]')
         const label = item.querySelector('label')
         const input = item.querySelector('input[type=text]') 
-       console.log(check);
-       console.log(label);
-       console.log(input);
+     
        if (check.checked) { //в объект попадают свойства, которые выбрали
         appData.servicesNumber[label.textContent] = +input.value; 
        }
@@ -133,42 +146,31 @@ addScreenBlock: function () {
 
 //считает стоимость
 addPrices: function() {
+
+    appData.screenCount = 0;
    
     for (let screen of appData.screens) {
-    appData.screenPrice += +screen.price
+    appData.screenPrice += +screen.price;
+    appData.screenCount += screen.count;
 
 }
 for (let key in appData.servicesNumber){
-    appData.servicePricesNumber += appData.servicesNumber[key]
+    appData.servicePricesNumber += appData.servicesNumber[key];
   }
   for (let key in appData.servicesPercent){
-    appData.servicePricesPercent += appData.screenPrice * (appData.servicesPercent[key] / 100)
+    appData.servicePricesPercent += appData.screenPrice * (appData.servicesPercent[key] / 100);
   }
    appData.fullPrice = appData.screenPrice + appData.servicePricesNumber + appData.servicePricesPercent;
 
-},
+   // Доход после вычета отката посреднику
+   appData.servicePercentPrice = appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
 
-
-getServicePercentPrices: function() {
-     appData.servicePercentPrice = appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
-},
-
-getRollbackMessage: function (price) {
-    if (price >= 30000){
-    return "Даем скидку в 10%";
-} else if (price >= 15000 && fullPrice < 30000){
-     return "Даем скидку в 5%";
-} else if (price >= 0 && fullPrice < 15000){
-    return "Скидка не предусмотрена";
-} else {
-    return "Что то пошло не так";
-}
 },
 
 logger: function () {
-console.log(appData.fullPrice);
-console.log(appData.servicePercentPrice);
-console.log(appData.screens);
+//console.log(appData.fullPrice);
+//console.log(appData.servicePercentPrice);
+//console.log(appData.screens);
 }
 }
 
