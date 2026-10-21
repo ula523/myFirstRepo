@@ -1,178 +1,50 @@
-'use strict';
+'use strict'
 
-let title = document.getElementsByTagName('h1')[0]
-let buttonStart = document.getElementsByClassName('handler_btn')[0]
-let otherItemsPercent = document.querySelectorAll('.other-items.percent')
-let otherItemsNumber = document.querySelectorAll('.other-items.number')
+const todoControl = document.querySelector('.todo-control')
+const headerInput = document.querySelector('.header-input')
+const todoList = document.querySelector('.todo-list')
+const todoCompleted = document.querySelector('.todo-completed')
 
-let range = document.querySelector('.rollback input[type="range"]')
-let rangeValue = document.querySelector('span.range-value ')
+const todoData = []
 
-let buttonReset = document.getElementsByClassName('handler_btn')[1]
-let plus = document.querySelector('.screen-btn')
+const render = function() { // перебирает массив todoData 
+    todoList.innerHTML = '' 
+    todoCompleted.innerHTML = ''
 
-let total = document.getElementsByClassName('total-input')[0]
-let totalCount = document.getElementsByClassName('total-input')[1]
-let totalCountOther = document.getElementsByClassName('total-input')[2]
-let fullTotalCount = document.getElementsByClassName('total-input')[3]
-let totalCountRollback = document.getElementsByClassName('total-input')[4]
+    todoData.forEach(function(item) { //при каждой итерации получаем очередной объект item
+     const li = document.createElement('li'); //создает элемент li
+     li.classList.add('todo-item'); //добавляет класс
+     li.innerHTML = '<span class="text-todo">' + item.text + '</span>' + 
+     '<div class="todo-buttons">' +
+	 '<button class="todo-remove"></button>' +
+	 '<button class="todo-complete"></button>' +
+	 '</div>'
+     
+     if(item.completed) {
+        todoCompleted.append(li) //вставляет элементы в список
 
-let screenClass = document.querySelectorAll('.screen')
+     } else {
+        todoList.append(li) //вставляет элементы в список
+     }
+       li.querySelector('.todo-complete').addEventListener('click', function() {
+        item.completed = !item.completed; //меняет свойство на противоположное
+        render()
 
-const appData = {
-title: '',
-screens: [],
-screenPrice: 0,
-adaptive: true,
-rollback: 10,
-servicePricesPercent: 0,
-servicePricesNumber: 0,
-fullPrice: 0,
-servicePercentPrice: 0,
-servicesPercent: {},
-servicesNumber: {},
-init: function() {
-    appData.addTitle()
-    buttonStart.addEventListener('click', appData.start) //обработчик события по клику, который запускает метод appData.start
-    plus.addEventListener('click', appData.addScreenBlock)
+       })
 
-    //меняется значение при перемещении ползунка
-    range.addEventListener('input', function() {
-        rangeValue.textContent = range.value;
-        appData.rollback = Number(range.value);
     })
-    
+}
 
-},
-addTitle: function() {
-    document.title = title.textContent; // изменен title страницы
-    
-},
-start: function () {
-    //проверка, что тип экранов не пустой 
-    const selects = document.querySelectorAll('.screen select');
+todoControl.addEventListener('submit', function(event) { //submit- событие каждой формы
+    event.preventDefault() //отменяет перезгрузку страницу после нажатия enter
 
-    for (const select of selects) {
-        if (select.value === '' || select.value === '0') {
-            alert('Выберите тип экрана');
-            return;
-        }
+    const newToDo = {
+        text: headerInput.value, //берет значение из инпута
+        completed: false
     }
-    appData.addScreens()
-    appData.addServices()
-    appData.addPrices()
 
-//appData.getServicePercentPrices()
-
-//appData.logger()
-    appData.showResult()
-},
-
-//вывод результатов
-
-showResult: function() {
-   total.value = appData.screenPrice
-   totalCountOther.value = appData.servicePricesPercent + appData.servicePricesNumber
-   fullTotalCount.value = appData.fullPrice
-   //Стоимость с учетом отката
-    totalCountRollback.value = appData.servicePercentPrice
-    //Количество экранов
-    totalCount.value = appData.screenCount;
-},
-
-addScreens: function() {
-    screenClass = document.querySelectorAll('.screen')
-  screenClass.forEach(function(screen, index) { 
-    const select = screen.querySelector('select')
-    const input = screen.querySelector('input')
-    const selectName = select.options[select.selectedIndex].textContent // полуает текст из инпута
-
-    appData.screens.push({
-        id: index, 
-        name: selectName, 
-        price: +select.value * +input.value,
-        count: +input.value,
-   
-
-  })
+todoData.push(newToDo) // запушить newToDo в массив todoData
+headerInput.value = '' //удаляет текст в инпуте 
+render()
 
 })
-  
-
-},
-//дает объекту необходимую информацию
-addServices: function() {
-
-    otherItemsPercent.forEach(function(item) {
-        const check = item.querySelector('input[type=checkbox]')
-        const label = item.querySelector('label')
-        const input = item.querySelector('input[type=text]') 
-   
-       if (check.checked) { //в объект попадают свойства, которые выбрали
-        appData.servicesPercent[label.textContent] = +input.value; 
-       }
-      
-
-    })
-
-    otherItemsNumber.forEach(function(item) {
-        const check = item.querySelector('input[type=checkbox]')
-        const label = item.querySelector('label')
-        const input = item.querySelector('input[type=text]') 
-     
-       if (check.checked) { //в объект попадают свойства, которые выбрали
-        appData.servicesNumber[label.textContent] = +input.value; 
-       }
-      
-
-    })
-
-   
-
-},
-//проверка на строку
-isText: function (str) {
-    return typeof str === 'string' && /\p{L}/u.test(str);
-},
-
-//создание копии первого блока и добавление после последнего блока
-addScreenBlock: function () {
-    const cloneScreen = screenClass[0].cloneNode(true) // клонирует элемент на странице
-    console.log(cloneScreen);
-    screenClass[screenClass.length - 1].after(cloneScreen);
-
-},
-
-
-//считает стоимость
-addPrices: function() {
-
-    appData.screenCount = 0;
-   
-    for (let screen of appData.screens) {
-    appData.screenPrice += +screen.price;
-    appData.screenCount += screen.count;
-
-}
-for (let key in appData.servicesNumber){
-    appData.servicePricesNumber += appData.servicesNumber[key];
-  }
-  for (let key in appData.servicesPercent){
-    appData.servicePricesPercent += appData.screenPrice * (appData.servicesPercent[key] / 100);
-  }
-   appData.fullPrice = appData.screenPrice + appData.servicePricesNumber + appData.servicePricesPercent;
-
-   // Доход после вычета отката посреднику
-   appData.servicePercentPrice = appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
-
-},
-
-logger: function () {
-//console.log(appData.fullPrice);
-//console.log(appData.servicePercentPrice);
-//console.log(appData.screens);
-}
-}
-
-
-appData.init();
