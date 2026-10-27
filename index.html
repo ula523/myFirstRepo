@@ -3,9 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Урок 16</title>
+    <title>Урок 17</title>
+   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+   <section>
+    <div class="wrapper">
+        <h2 class="title">Форма для заполнения</h2>
+     <form method="post" id="employee-form">
+        <label for="fio" class="label-block">фио</label>
+        <input type="text" id="fio" name="fio" required class="input-block">
+
+         
+
+        <label for="age" class="label-block">возраст</label>
+        <input type="text" id="age" name="age" required class="input-block">
+
+        <label for="position" class="label-block">должность</label>
+        <input type="text" id="position" name="position" required class="input-block">
+
+      
+        <label for="organization" class="label-block">организация</label>
+        <input type="text" id="organization" name="organization" required class="input-block">
+
+        <label for="employment-date" class="label-block">Дата принятия на работу:</label>
+        <input type="date" id="employment-date" name="employment_date" required class="input-block">
+
+    <div class="children-block">
+    <legend class="label-block">Наличие детей:</legend>
+
+    <label>
+        <input type="radio" name="children" value="yes" required>
+        Есть
+    </label>
+
+    <label>
+        <input type="radio" name="children" value="no">
+        Нет
+    </label>
+    
+</div>
+
+    <button type="submit" class="btn" id="save-btn">Сохранить</button>
+
+    
+    </form>
+    </div>
+
+    <div class="wrapper">
+        <h2 class="title">Список сотрудников</h2>
+
+    <table id="employees-table">
+    <thead>
+        <tr>
+             
+            <th>ФИО</th>
+            <th>Возраст</th>
+            <th>Должность</th>
+            <th>Организация</th>  
+            <th>Дата принятия на работу</th>
+              <th>Наличие детей</th>
+              <th></th>
+        </tr>
+        <tr>
+            <td>Иванов Иван Иванович</td>
+           
+            <td>35 лет</td>
+            <td>Инженер</td>
+            <td>ООО «Пример»</td>
+            <td>27.10.2026</td>
+            <td>Есть</td>
+             <td><button type="submit" class="btn delete-btn">Удалить</button></td>
+           
+        </tr>
+        <tr>
+            <td>Иванов Иван Иванович</td>
+           
+            <td>35 лет</td>
+            <td>Инженер</td>
+            <td>ООО «Пример»</td>
+            <td>27.10.2026</td>
+            <td>Есть</td>
+             <td><button type="submit" class="btn delete-btn">Удалить</button></td>
+           
+        </tr>
+        <tr>
+            <td>Иванов Иван Иванович</td>
+           
+            <td>35 лет</td>
+            <td>Инженер</td>
+            <td>ООО «Пример»</td>
+            <td>27.10.2026</td>
+            <td>Есть</td>
+             <td><button type="submit" class="btn delete-btn">Удалить</button></td>
+           
+        </tr>
+        <tr>
+            <td>Иванов Иван Иванович</td>
+           
+            <td>35 лет</td>
+            <td>Инженер</td>
+            <td>ООО «Пример»</td>
+            <td>27.10.2026</td>
+            <td>Есть</td>
+             <td><button type="submit" class="btn delete-btn">Удалить</button></td>
+           
+        </tr>
+        <tr>
+            <td>Иванов Иван Иванович</td>
+           
+            <td>35 лет</td>
+            <td>Инженер</td>
+            <td>ООО «Пример»</td>
+            <td>27.10.2026</td>
+            <td>Есть</td>
+             <td><button type="submit" class="btn delete-btn">Удалить</button></td>
+           
+        </tr>
+    </thead>
+
+    <tbody id="employees-wrapper">
+         
+    </tbody>
+</table>
+    </div>
+   </section>
 
 
     <script src="js/script.js"></script>

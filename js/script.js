@@ -1,24 +1,6 @@
 'use strict';
 
-class First {
-    hello (){
-        console.log('Привет я метод родителя!');
-    }
-    
-}
-const one = new First
+let delete_btn = document.getElementsByClassName("delete-btn");
 
-class Second extends First { 
- constructor() {
-    super()
-  }
-  hello() {
-    super.hello()
-    console.log("А я наследуемый метод!");
-  }
-
-}
-
-const two = new Second
-two.hello()
+console.log(delete_btn);
 
