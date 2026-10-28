@@ -20,8 +20,12 @@
         <label for="age" class="label-block">возраст</label>
         <input type="text" id="age" name="age" required class="input-block">
 
-        <label for="position" class="label-block">должность</label>
-        <input type="text" id="position" name="position" required class="input-block">
+        <label for="position" class="label-block">Должность:</label>
+         <select id="position" name="position" required>
+            <option value="">Выберите должность</option>
+             <option value="Слесарь">Слесарь</option>
+             <option value="Водитель">Водитель</option>
+         </select>
 
       
         <label for="organization" class="label-block">организация</label>
@@ -30,20 +34,25 @@
         <label for="employment-date" class="label-block">Дата принятия на работу:</label>
         <input type="date" id="employment-date" name="employment_date" required class="input-block">
 
-    <div class="children-block">
-    <legend class="label-block">Наличие детей:</legend>
+    <div class="children-block"> 
+        <label for="children" class="label-block" style="margin-bottom: 0;">Наличие детей</label>
+        <input type="checkbox" id="children" name="children" value="yes">
+       
+    </div>
+    <label for="grade" class="label-block">Разряд слесаря:</label>
+    <input type="number" id="grade" name="grade" min="1" max="6" class="input-block">
 
-    <label>
-        <input type="radio" name="children" value="yes" required>
-        Есть
-    </label>
+    <label for="category" class="label-block">Категория водителя:</label>
+      <select id="category" name="category">
+          <option value="">Выберите категорию</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+      </select>
 
-    <label>
-        <input type="radio" name="children" value="no">
-        Нет
-    </label>
     
-</div>
+    
+ 
 
     <button type="submit" class="btn" id="save-btn">Сохранить</button>
 
@@ -66,61 +75,8 @@
               <th>Наличие детей</th>
               <th></th>
         </tr>
-        <tr>
-            <td>Иванов Иван Иванович</td>
-           
-            <td>35 лет</td>
-            <td>Инженер</td>
-            <td>ООО «Пример»</td>
-            <td>27.10.2026</td>
-            <td>Есть</td>
-             <td><button type="submit" class="btn delete-btn">Удалить</button></td>
-           
-        </tr>
-        <tr>
-            <td>Иванов Иван Иванович</td>
-           
-            <td>35 лет</td>
-            <td>Инженер</td>
-            <td>ООО «Пример»</td>
-            <td>27.10.2026</td>
-            <td>Есть</td>
-             <td><button type="submit" class="btn delete-btn">Удалить</button></td>
-           
-        </tr>
-        <tr>
-            <td>Иванов Иван Иванович</td>
-           
-            <td>35 лет</td>
-            <td>Инженер</td>
-            <td>ООО «Пример»</td>
-            <td>27.10.2026</td>
-            <td>Есть</td>
-             <td><button type="submit" class="btn delete-btn">Удалить</button></td>
-           
-        </tr>
-        <tr>
-            <td>Иванов Иван Иванович</td>
-           
-            <td>35 лет</td>
-            <td>Инженер</td>
-            <td>ООО «Пример»</td>
-            <td>27.10.2026</td>
-            <td>Есть</td>
-             <td><button type="submit" class="btn delete-btn">Удалить</button></td>
-           
-        </tr>
-        <tr>
-            <td>Иванов Иван Иванович</td>
-           
-            <td>35 лет</td>
-            <td>Инженер</td>
-            <td>ООО «Пример»</td>
-            <td>27.10.2026</td>
-            <td>Есть</td>
-             <td><button type="submit" class="btn delete-btn">Удалить</button></td>
-           
-        </tr>
+        
+        
     </thead>
 
     <tbody id="employees-wrapper">

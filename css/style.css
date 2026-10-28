@@ -1,3 +1,6 @@
+body {
+        font-family: sans-serif;
+}
 .title {
     font-size: 18px;
     line-height: 26px;
@@ -21,13 +24,17 @@ form{
     max-width: 500px;
     margin-bottom: 60px;
 }
-.input-block {
+.input-block, #position, #category {
     margin-bottom: 20px;
-    margin-top: 10apx;
+    margin-top: 10px;
     border: 1px solid darkgray;
     padding: 10px;
     border-radius: 5px;
 }
+#category {
+    margin-bottom: 50px;
+}
+
 .label-block {
     margin-bottom: 10px;
     font-size: 14px;
@@ -35,7 +42,11 @@ form{
     text-transform: uppercase;
 }
 .children-block {
-    margin-bottom: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
 }
 .btn {
     cursor: pointer;
