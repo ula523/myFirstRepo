@@ -1,93 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Урок 17</title>
-   <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
-   <section>
-    <div class="wrapper">
-        <h2 class="title">Форма для заполнения</h2>
-     <form method="post" id="employee-form">
-        <label for="fio" class="label-block">фио</label>
-        <input type="text" id="fio" name="fio" required class="input-block">
-
-         
-
-        <label for="age" class="label-block">возраст</label>
-        <input type="text" id="age" name="age" required class="input-block">
-
-        <label for="position" class="label-block">Должность:</label>
-         <select id="position" name="position" required>
-            <option value="">Выберите должность</option>
-             <option value="Слесарь">Слесарь</option>
-             <option value="Водитель">Водитель</option>
-         </select>
-
-      
-        <label for="organization" class="label-block">организация</label>
-        <input type="text" id="organization" name="organization" required class="input-block">
-
-        <label for="employment-date" class="label-block">Дата принятия на работу:</label>
-        <input type="date" id="employment-date" name="employment_date" required class="input-block">
-
-    <div class="children-block"> 
-        <label for="children" class="label-block" style="margin-bottom: 0;">Наличие детей</label>
-        <input type="checkbox" id="children" name="children" value="yes">
-       
-    </div>
-    <label for="grade" class="label-block">Разряд слесаря:</label>
-    <input type="number" id="grade" name="grade" min="1" max="6" class="input-block">
-
-    <label for="category" class="label-block">Категория водителя:</label>
-      <select id="category" name="category">
-          <option value="">Выберите категорию</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-          <option value="D">D</option>
-      </select>
-
-    
-    
- 
-
-    <button type="submit" class="btn" id="save-btn">Сохранить</button>
-
-    
-    </form>
-    </div>
-
-    <div class="wrapper">
-        <h2 class="title">Список сотрудников</h2>
-
-    <table id="employees-table">
-    <thead>
-        <tr>
-             
-            <th>ФИО</th>
-            <th>Возраст</th>
-            <th>Должность</th>
-            <th>Организация</th>  
-            <th>Дата принятия на работу</th>
-              <th>Наличие детей</th>
-              <th></th>
-        </tr>
-        
-        
-    </thead>
-
-    <tbody id="employees-wrapper">
-         
-    </tbody>
-</table>
-    </div>
-   </section>
-
-
-    <script src="js/script.js"></script>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="script.js"></script>
+  </body>
 </html>
