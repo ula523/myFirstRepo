@@ -1,32 +1,35 @@
-const getData = (url) => {
-  return fetch(url).then((response) => response.json());
+"use strict";
+
+const select = document.getElementById("cars");
+const output = document.getElementById("output");
+
+const getData = url => {
+  return fetch(url).then(response => response.json());
 };
 
-const sendData = (url, data) => {
-  return fetch(url, {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-type": "application/json",
-    },
-  }).then((response) => response.json());
-};
-
-window.addEventListener("DOMContentLoaded", () => {
-  getData("db.json")
-    .then((data) => {
-      console.log(data);
-
-      return sendData("https://jsonplaceholder.typicode.com/posts", data);
-    })
-    .then((result) => {
-      //ответ сервера
-
-      console.log(result);
-    })
-    .catch((error) => {
-      //вывод ошибки
-
-      console.error(error);
+getData("cars.json")
+  .then(data => {
+    data.cars.forEach(car => {
+      const option = document.createElement("option");
+      option.value = car.brand;
+      option.textContent = car.brand;
+      select.append(option);
     });
-});
+
+    select.addEventListener("change", () => {
+      if (select.value === "") {
+        output.textContent = "Выберите тачку";
+        return;
+      }
+
+      data.cars.forEach(car => {
+        if (car.brand === select.value) {
+          output.innerHTML = `Тачка: ${car.brand.toUpperCase()} ${car.model} <br> Цена: ${car.price}$`;
+        }
+      });
+    });
+  })
+  .catch(() => {
+    output.textContent = "Произошла ошибка";
+    output.style.color = "red";
+  });
